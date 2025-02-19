@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class loginPage extends StatelessWidget {
@@ -8,15 +6,25 @@ class loginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child:Center(
-        child: Text("Login Page",
-        style:TextStyle(
-          fontSize: 20,
-          color: Colors.blue,
-          fontWeight: FontWeight.bold,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            "assets/images/login_image.png",
+            errorBuilder: (context, error, stackTrace) {
+              return const Text("Failed to load image");
+            },
           ),
-        ),
-      )
+          const SizedBox(height: 16),
+          const Text(
+            "Welcome",
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

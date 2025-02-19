@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -11,14 +10,24 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Catalog App"),
-      ) ,
-        body: Center(
-          child: Container(
-            child: Text("Welcome to  $days days of flutter by $name"),
-          ),
+        title: const Text("Catalog App"),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              "assets/images/login_image.png",
+              errorBuilder: (context, error, stackTrace) {
+                return const Text("Failed to load image");
+              },
+            ),
+            const SizedBox(height: 20),
+            Text("Welcome to $days days of flutter by $name"),
+          ],
         ),
-        drawer: Drawer(),
-      );
+      ),
+      drawer: const Drawer(),
+    );
   }
-} 
+}
