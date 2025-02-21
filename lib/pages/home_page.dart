@@ -16,12 +16,12 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              "assets/images/login_image.png",
-              errorBuilder: (context, error, stackTrace) {
-                return const Text("Failed to load image");
-              },
-            ),
+            // Image.asset(
+            //   "assets/images/login_image.png",
+            //   errorBuilder: (context, error, stackTrace) {
+            //     return const Text("Failed to load image");
+            //   },
+            // ),
             const SizedBox(height: 20),
             Text("Welcome to $days days of flutter by $name"),
           ],
