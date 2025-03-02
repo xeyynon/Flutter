@@ -19,10 +19,11 @@ class _HomePageState extends State<HomePage> {
     loadData();
   }
 
-  Future<void> loadData() async {
-    final catalogJson = await rootBundle.loadString("assets/files/catalog.json");
+  loadData() async {
+    final catalogJson =
+        await rootBundle.loadString("assets/files/catalog.json");
     final decodedData = jsonDecode(catalogJson);
-    var productsData = decodedData["Products"];
+    var productsData = decodedData["products"];
   }
 
   @override
