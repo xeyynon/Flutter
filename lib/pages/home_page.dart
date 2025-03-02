@@ -20,37 +20,39 @@ class _HomePageState extends State<HomePage> {
   }
 
   loadData() async {
+    await Future.delayed(
+        const Duration(seconds: 3)); // Simulating network delay
     final catalogJson =
         await rootBundle.loadString("assets/files/catalog.json");
     final decodedData = jsonDecode(catalogJson);
     var productsData = decodedData["products"];
+
+    CatalogModel.items = List.from(productsData)
+        .map<Item>((item) => Item.fromMap(item))
+        .toList();
+
+    setState(() {}); // Update UI after loading data
   }
 
   @override
   Widget build(BuildContext context) {
-    final List dummyList;
-    if ((CatalogModel.items.isNotEmpty)) {
-      dummyList = List.generate(4, (index) => CatalogModel.items[0]);
-    } else {
-      dummyList = [];
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("Catalog App"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: dummyList.isNotEmpty
+        child: (CatalogModel.items.isNotEmpty)
             ? ListView.builder(
-                itemCount: dummyList.length,
+                itemCount: CatalogModel.items.length,
                 itemBuilder: (context, index) {
                   return ItemWidget(
-                    item: dummyList[index],
+                    item: CatalogModel.items[index],
                   );
                 },
               )
-            : const Center(child: Text("No items available")),
+            : const Center(
+                child: CircularProgressIndicator()), // Show loading indicator
       ),
       drawer: const MyDrawer(),
     );
