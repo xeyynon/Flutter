@@ -1,26 +1,60 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class MyTheme {
   static ThemeData lightTheme(BuildContext context) => ThemeData(
-      primarySwatch: Colors.deepPurple,
-      fontFamily: GoogleFonts.poppins().fontFamily,
-      appBarTheme: AppBarTheme(
-        color: Colors.white,
-        elevation: 0.0,
-        iconTheme: IconThemeData(color: Colors.black),
-        titleTextStyle: TextStyle(
-          color: Colors.black,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-          fontFamily: GoogleFonts.lato().fontFamily,
+        fontFamily: GoogleFonts.poppins().fontFamily,
+        cardColor: Colors.white,
+        canvasColor: creamColor,
+        primaryColor: darkBluishColor,
+        colorScheme: ColorScheme.light(
+          primary: darkBluishColor,
+          secondary: darkBluishColor, // ✅ Secondary color replaces buttonColor
         ),
-      ));
+        appBarTheme: const AppBarTheme(
+          color: Colors.white,
+          elevation: 0.0,
+          iconTheme: IconThemeData(color: Colors.black),
+          titleTextStyle: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: darkBluishColor,
+            foregroundColor: Colors.white,
+          ),
+        ),
+      );
 
-  static ThemeData darkTheme(BuildContext context) =>
-      ThemeData(brightness: Brightness.dark);
+  static ThemeData darkTheme(BuildContext context) => ThemeData(
+        brightness: Brightness.dark,
+        fontFamily: GoogleFonts.poppins().fontFamily,
+        cardColor: Colors.black,
+        canvasColor: darkCreamColor,
+        primaryColor: lightBluishColor,
+        colorScheme: ColorScheme.dark(
+          primary: lightBluishColor,
+          secondary: Vx.white,
+        ),
+        appBarTheme: const AppBarTheme(
+          color: Colors.black,
+          elevation: 0.0,
+          iconTheme: IconThemeData(color: Colors.white),
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      );
 
-  //colors
-  static Color creeamColor = Color(0xfff5f5f5);
-  static Color darkBluishColor = Color(0xfff403b58);
+  // Colors
+  static Color creamColor = const Color(0xfff5f5f5);
+  static Color darkCreamColor = Vx.gray900;
+  static Color lightBluishColor = Vx.indigo500;
+  static Color darkBluishColor = const Color(0xff403b58);
 }

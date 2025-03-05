@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_catalog/pages/utils/routes.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,24 +16,23 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
   moveToHome(BuildContext context) async {
-    if(_formKey.currentState?.validate() ?? false){
+    if (_formKey.currentState?.validate() ?? false) {
       setState(() {
         changeButton = true;
-    });
+      });
 
-    await Future.delayed(Duration(seconds: 1));
-    await Navigator.pushNamed(context, MyRoutes.homeRoute);
-    setState(() {
-      changeButton = false;
-    });
+      await Future.delayed(Duration(seconds: 1));
+      await Navigator.pushNamed(context, MyRoutes.homeRoute);
+      setState(() {
+        changeButton = false;
+      });
     }
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: context.canvasColor,
       child: SingleChildScrollView(
         child: Form(
           key: _formKey,
@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                         labelText: "Username",
                       ),
                       validator: (value) {
-                         if (value?.isEmpty ?? true) {
+                        if (value?.isEmpty ?? true) {
                           return "Username Cannot Be Empty";
                         }
                         return null;
@@ -81,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                         labelText: "Password",
                       ),
                       validator: (value) {
-                         if (value?.isEmpty ?? true) {
+                        if (value?.isEmpty ?? true) {
                           return "Passsword Cannot Be Empty";
                         } else if ((value?.length ?? 0) < 6) {
                           return "Passsword length should be atleast six";
@@ -91,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: 20.0),
                     Material(
-                      color: Colors.deepPurple,
+                      color: context.theme.colorScheme.primary,
                       borderRadius:
                           BorderRadius.circular(changeButton ? 50 : 8),
                       child: InkWell(
