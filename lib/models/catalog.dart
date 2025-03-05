@@ -6,13 +6,13 @@ class CatalogModel {
   static List<Item> items = [];
 
 // Get item by ID
-  static Item getById(int id) => items.firstWhere(
+  Item getById(int id) => items.firstWhere(
         (element) => element.id == id,
         orElse: () => throw Exception("Item not found"), // Default fallback
       );
 
   // Get item by position (with safety check)
-  static Item getByPosition(int pos) {
+  Item getByPosition(int pos) {
     if (pos >= 0 && pos < items.length) {
       return items[pos];
     }
