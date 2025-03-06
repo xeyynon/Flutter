@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_catalog/models/cart.dart';
 import 'package:flutter_catalog/models/catalog.dart';
 import 'package:flutter_catalog/pages/home_detail_page.dart';
 import 'package:flutter_catalog/pages/widgets/home_widgets/catalog_image.dart';
@@ -35,16 +36,7 @@ class CatalogItem extends StatelessWidget {
                   buttonPadding: EdgeInsets.zero,
                   children: [
                     "\$${catalog.price}".text.bold.xl.make(),
-                    ElevatedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                              context.theme.colorScheme.primary,
-                            ),
-                            shape: MaterialStateProperty.all(
-                              StadiumBorder(),
-                            )),
-                        child: "Add To Cart".text.color(Colors.white).make())
+                    _AddToCart()
                   ],
                 ).pOnly(right: 8.0)
               ],
@@ -53,6 +45,50 @@ class CatalogItem extends StatelessWidget {
         ],
       ),
     ).color(context.cardColor).rounded.square(150).make().py16();
+  }
+}
+
+class _AddToCart extends StatefulWidget {
+  const _AddToCart({
+    super.key,
+  });
+
+  @override
+  State<_AddToCart> createState() => _AddToCartState();
+}
+
+class _AddToCartState extends State<_AddToCart> {
+  bool isAdded = false;
+  @override
+  Widget build(BuildContext context) {
+    final cart = CartModel();
+    final catalog = CatalogModel();
+    return ElevatedButton(
+      onPressed: () {
+        isAdded = isAdded.toggle();
+
+        final _cart = CartModel();
+        _cart.catalog = CatalogModel(); // Assign the catalog to cart
+
+        if (CatalogModel.items.isNotEmpty) {
+          _cart.add(CatalogModel.items.first); // ✅ Add an actual item
+        } else {
+          print("Catalog is empty! Cannot add to cart.");
+        }
+
+        setState(() {});
+      },
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(
+            context.theme.colorScheme.primary,
+          ),
+          shape: MaterialStateProperty.all(
+            StadiumBorder(),
+          )),
+      child: isAdded
+          ? Icon(Icons.done)
+          : "Add To Cart".text.color(Colors.white).make(),
+    );
   }
 }
 
